@@ -1,0 +1,41 @@
+n=int(input("enter no of nodes: "))
+adj=[]
+print("enter adjacency matrix: ")
+for i in range(n):
+    x=[]
+    for j in range(n):
+        x.append(int(input()))
+    adj.append(x)
+
+routing_table=[]
+for i in range(n):
+    x=[]
+    for j in range(n):
+        x.append(99999)
+    routing_table.append(x)
+
+print("routing table is: ",routing_table)
+
+for i in range(n):
+    for j in range(n):
+        if(i==j or adj[i][j]!=0):
+            routing_table[i][j]=adj[i][j]
+
+while(True):
+    flag=0
+    for i in range(n):
+        for j in range(n):
+            if adj[i][j]!=0:
+                for k in range(n):
+                    if routing_table[i][k]==99999:
+                        continue
+                    if routing_table[i][k]+routing_table[i][j]<routing_table[j][k]:
+                        routing_table[j][k]=routing_table[i][k]+routing_table[i][j]
+                        flag=1
+    if flag==0:
+        break
+
+for i in range(n):
+    for j in range(n):
+        print(routing_table[i][j],end=" ")
+    print()
