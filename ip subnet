@@ -1,0 +1,30 @@
+def ipclass(l):
+    x=int(l[0])
+    if x>=0 and x<=126:
+        print("class A")
+    elif x>=128 and x<=191:
+        print("class B")
+    elif x>=192 and x<=223:
+        print("class C")
+    elif x>=224 and x<=239:
+        print("class B")
+    elif x>=240 and x<=255:
+        print("class E")
+
+def generate(n,l):
+    x=int(l[3])
+    mask=0xFFFFFFFF<<(32-n)
+    l[0]=str(int(l[0]) & (mask >> 24 & 0xFF))
+    l[1]=str(int(l[1])&(mask>>16&0xFF))
+    l[2]=str(int(l[2])&(mask>>8 & 0xFF))
+    l[3]=str(int(l[3])&(mask&0xFF))
+    
+    print("subnet ip is:",'.'.join(l))
+
+if __name__=="__main__":
+    ip=input("enter ip address: ")
+    l=ip.split(".")
+    ipclass(l)
+    n=int(input("enter no of subnet bits:"))
+    generate(n,l)
+
