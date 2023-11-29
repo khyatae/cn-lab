@@ -1,0 +1,18 @@
+import random
+
+if __name__=="__main__":
+    n=int(input("enter no of bits: "))
+    w=int(input("enter window size: "))
+    i=0
+    base=0
+    while(base<n):
+        while(i<base+w and i<n):
+            print("sent frame ",i)
+            i+=1
+            
+        if random.randint(0,10)>8:
+            print("received nack for frame",base)
+            i=base
+        else:
+            print("received ack for frame",base)
+            base+=1
